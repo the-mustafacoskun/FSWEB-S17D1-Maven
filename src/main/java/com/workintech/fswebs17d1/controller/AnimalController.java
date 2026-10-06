@@ -26,7 +26,7 @@ public class AnimalController {
         return this.animals.values().stream().toList();
     }
     @GetMapping("/animal/{id}")
-    public Animal getAnimal(@PathVariable int id) {
+    public Animal returnAnimalById(@PathVariable int id) {
         if(id<0 || id>this.animals.size()) {
 
             System.out.println("AnimalController getAnimal: id out of bounds");
@@ -37,8 +37,9 @@ public class AnimalController {
     }
 
     @PostMapping("/animal")
-    public Animal saveAnimal(@RequestBody Integer id, @RequestBody String name) {
-        return this.animals.put(id, new Animal(id,name));
+    public Animal addAnimal(@RequestBody Animal animal) {
+        this.animals.put(animal.getId(), animal);
+        return animal;
     }
 
     @PutMapping("/animal/{id}")
